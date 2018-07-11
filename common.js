@@ -67,6 +67,9 @@ function match(url) {
   else {
     const h = hostname(url);
     let s = prefs.custom[h] || prefs.custom['*'];
+    if (!s && (h.split(".").length - 1) > 1) {
+      s = prefs.custom[("*." + h.substring(h.indexOf(".") + 1))];
+    }
     // if s is an array select a random string
     if (Array.isArray(s)) {
       s = s[Math.floor(Math.random() * s.length)];
